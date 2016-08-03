@@ -4,6 +4,6 @@
 *.jar
 *.war
 *.ear
-crawler-center.iml
+*.iml
 .idea/*
 hs_err_pid*
