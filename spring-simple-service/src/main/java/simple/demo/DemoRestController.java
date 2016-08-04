@@ -2,6 +2,7 @@ package simple.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Created by sai on 16-8-3.
  */
+@RefreshScope
 @RestController
 @RequestMapping("/api/position")
 public class DemoRestController
@@ -24,22 +26,12 @@ public class DemoRestController
     @Autowired
     MongoOperations mongoOperations;
 
-    @Value("${message}")
-    String message;
-
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     ResponseEntity getPositions()
     {
         List<Position> positionList = mongoOperations.findAll(Position.class);
         return new ResponseEntity(positionList, HttpStatus.OK);
     }
-
-    @RequestMapping(value = "/message", method = RequestMethod.GET)
-    String getMessage()
-    {
-        return this.message;
-    }
-
 
 }
 
