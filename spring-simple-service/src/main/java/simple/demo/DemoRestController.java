@@ -40,7 +40,7 @@ class Position
 {
     @Id
     String id;
-
+    String name;
     String companyName;
     String groupName;
     String functionName;
@@ -52,6 +52,14 @@ class Position
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCompanyName() {
