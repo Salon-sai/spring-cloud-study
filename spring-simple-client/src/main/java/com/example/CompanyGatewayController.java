@@ -1,5 +1,6 @@
 package com.example;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.Resources;
@@ -10,41 +11,40 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by sai on 16-8-5.
+ * Created by sai on 16-8-7.
  */
 @RestController
-@RequestMapping("/position")
-public class SimpleGatewayController
-{
+@RequestMapping("/company")
+public class CompanyGatewayController {
 
     @Autowired
     private RestTemplate restTemplate;
 
-
-    @RequestMapping("/names")
-    Collection<String> getPositionProxy()
+    @HystrixCommand(fallbackMethod = "getCompanyNamesFallback")
+    @RequestMapping("/all")
+    Collection getCompanyProxy()
     {
-        ParameterizedTypeReference<Resources<Position>> ptr =
-                new ParameterizedTypeReference<Resources<Position>>() {};
-        ResponseEntity<Resources<Position>> responseEntity =
-                this.restTemplate.exchange("http://simple-service/api/position/all",
-                    HttpMethod.GET, null, ptr);
+        ParameterizedTypeReference<List<Company>> ptr =
+                new ParameterizedTypeReference<List<Company>>() {};
+        ResponseEntity<List<Company>> responseEntity = this.restTemplate.exchange("http://simple-service/company/all",
+                HttpMethod.GET, null, ptr);
 
         return responseEntity
                 .getBody()
-                .getContent()
                 .stream()
-                .map(Position::getName)
+                .map(Company::getName)
                 .collect(Collectors.toList());
     }
 
-    @RequestMapping("/message")
-    String proxyMessage()
+    Collection getCompanyNamesFallback()
     {
-        String message = this.restTemplate.getForObject("http://simple-service/message", String.class);
-        return message;
+        return Collections.emptyList();
     }
+
+
 }

@@ -6,22 +6,30 @@ package com.example;
 public class Position
 {
 
-    private Integer id;
+    private String id;
     private String name;
+    private String companyName;
+    private String groupName;
+    private String functionName;
+    private String subFuncName;
 
     @Override
     public String toString() {
         return "Position{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", functionName='" + functionName + '\'' +
+                ", subFuncName='" + subFuncName + '\'' +
                 '}';
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -31,5 +39,37 @@ public class Position
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getFunctionName() {
+        return functionName;
+    }
+
+    public void setFunctionName(String functionName) {
+        this.functionName = functionName;
+    }
+
+    public String getSubFuncName() {
+        return subFuncName;
+    }
+
+    public void setSubFuncName(String subFuncName) {
+        this.subFuncName = subFuncName;
     }
 }
