@@ -46,6 +46,18 @@ class Position
     String functionName;
     String subFuncName;
 
+    @Override
+    public String toString() {
+        return "Position{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", functionName='" + functionName + '\'' +
+                ", subFuncName='" + subFuncName + '\'' +
+                '}';
+    }
+
     public String getId() {
         return id;
     }
